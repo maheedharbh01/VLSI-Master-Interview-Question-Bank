@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VLSI Master Interview Question Bank — 50 domains and 5,000 questions with answers.">
+  <title>VLSI Master — Interview Question Bank</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" id="brandHome" aria-label="VLSI Master home">
+        <span class="brand-mark">V</span><span><strong>VLSI MASTER</strong><small>INTERVIEW PREP</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav">
+        <button class="nav-item active" data-view="dashboard" style="--n1:#ff4fa3;--n2:#ff8a3d"><span class="nav-icon">🏠</span> Dashboard</button>
+        <button class="nav-item" data-view="domains" style="--n1:#7c5cff;--n2:#38bdf8"><span class="nav-icon">📚</span> All domains <span class="nav-count" id="domainNavCount">50</span></button>
+        <button class="nav-item" data-view="bookmarks" style="--n1:#ffb300;--n2:#ff6f00"><span class="nav-icon">⭐</span> Bookmarks <span class="nav-count" id="navBookmarks">0</span></button>
+        <button class="nav-item" data-view="completed" style="--n1:#12b76a;--n2:#84cc16"><span class="nav-icon">✅</span> Completed <span class="nav-count" id="navCompleted">0</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="side-level">
+          <div class="side-level-top"><span class="lvl-badge" id="sideLevelBadge">LV 1</span><span id="sideLevelName">Wafer Rookie</span></div>
+        </div>
+        <div class="side-progress">
+          <div class="side-progress-top"><span>Your progress</span><b id="sidePercent">0%</b></div>
+          <div class="progress-track"><span id="sideProgressBar"></span></div>
+          <small id="sideProgressText">0 of 5,000 completed</small>
+        </div>
+        <button class="nav-item" id="themeToggle" aria-label="Toggle dark theme"><span class="nav-icon" id="themeIcon">🌙</span><span id="themeText">Dark theme</span><span class="toggle"><i></i></span></button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+        <div class="breadcrumbs" id="breadcrumbs"><span>Workspace</span><b>/</b><strong>Dashboard</strong></div>
+        <div class="top-actions">
+          <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Search all 5,000 questions..." autocomplete="off"><kbd>⌘ K</kbd></label>
+          <div class="avatar">VM</div>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboardView">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR COMPLETE VLSI LEARNING LIBRARY</div>
+            <h1>Build confidence.<br><span>Master every domain.</span></h1>
+            <p>Explore a structured VLSI interview question bank, one concept at a time. Choose a domain, reveal answers, earn levels and watch your progress light up.</p>
+            <div class="hero-buttons">
+              <button class="primary-btn" id="exploreBtn">Explore all domains <span>→</span></button>
+              <button class="ghost-btn hidden" id="continueBtn">▶ Continue</button>
+              <button class="ghost-btn" id="randomBtn">🎲 Surprise me</button>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="chip chip-back"></div><div class="chip chip-front"><div class="chip-core">VLSI</div><i></i><i></i><i></i><i></i></div>
+            <span class="art-node node-a">RTL</span><span class="art-node node-b">STA</span><span class="art-node node-c">DFT</span><span class="art-node node-d">UVM</span><span class="art-node node-e">FPGA</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card s-purple"><div class="stat-icon">📚</div><div><span>Total domains</span><strong id="totalDomains">50</strong><small>Technical specializations</small></div></article>
+          <article class="stat-card s-blue"><div class="stat-icon">🧠</div><div><span>Total questions</span><strong id="totalQuestions">5,000</strong><small>Questions with detailed answers</small></div></article>
+          <article class="stat-card s-green"><div class="stat-icon">✅</div><div><span>Completed</span><strong id="completedCount">0</strong><small>Marked as understood</small></div></article>
+          <article class="stat-card s-orange"><div class="stat-icon">⭐</div><div><span>Bookmarked</span><strong id="bookmarkCount">0</strong><small>Saved for revision</small></div></article>
+        </div>
+
+        <div class="journey-grid">
+          <article class="qotd" id="qotd">
+            <div class="qotd-top"><span class="qotd-tag">💡 QUESTION OF THE DAY</span><button class="mini-btn" id="qotdShuffle">🎲 Another</button></div>
+            <div class="qotd-domain" id="qotdDomain"></div>
+            <h3 id="qotdQuestion"></h3>
+            <div class="qotd-answer hidden" id="qotdAnswer"></div>
+            <div class="qotd-actions"><button class="primary-btn small" id="qotdReveal">Reveal answer</button><button class="mini-btn light" id="qotdOpen">Open in domain →</button></div>
+          </article>
+          <article class="journey">
+            <div class="journey-head"><div class="ring" id="levelRing"><span id="ringText">0%</span></div>
+              <div><div class="eyebrow">YOUR JOURNEY</div><h3 id="levelName">Wafer Rookie</h3><small id="levelSub">Level 1 · 0 XP</small></div></div>
+            <div class="xp-track"><span id="xpBar"></span></div>
+            <small class="xp-text" id="xpText">Complete 25 questions to reach the next level</small>
+            <div class="journey-stats"><div><b id="streakCount">0</b><span>🔥 day streak</span></div><div><b id="domainsDone">0</b><span>🏆 domains mastered</span></div><div><b id="xpTotal">0</b><span>⚡ total XP</span></div></div>
+          </article>
+        </div>
+
+        <div class="section-heading"><div><div class="eyebrow">COLOR-CODED TRACKS</div><h2>Browse by track</h2><p>Ten learning tracks — every domain is color-coded to its track.</p></div></div>
+        <div class="track-grid" id="trackGrid"></div>
+
+        <div class="section-heading"><div><div class="eyebrow">LEARNING PATH</div><h2>Featured domains</h2><p>Start with the fundamentals or jump straight into your area of focus.</p></div><button class="text-btn" id="viewAllBtn">View all 50 domains <span>→</span></button></div>
+        <div class="domain-grid" id="featuredDomains"></div>
+      </section>
+
+      <section class="view" id="domainsView">
+        <div class="page-heading"><div><div class="eyebrow">THE COMPLETE LIBRARY</div><h1>All VLSI domains</h1><p>50 domains · 100 questions each · 5,000 questions in total</p></div></div>
+        <div class="toolbar"><label class="search-field"><span>⌕</span><input id="domainSearch" type="search" placeholder="Find a domain..."></label><span class="result-count" id="domainResultCount">50 domains</span></div>
+        <div class="chip-row" id="trackFilters"></div>
+        <div class="domain-grid" id="allDomains"></div>
+      </section>
+
+      <section class="view" id="questionsView">
+        <button class="back-link" id="backDomains">← Back to all domains</button>
+        <div class="domain-banner" id="domainBanner">
+          <div class="banner-emoji" id="bannerEmoji">🔬</div>
+          <div class="banner-copy"><div class="eyebrow" id="domainEyebrow">DOMAIN 01</div><h1 id="domainTitle">Semiconductor Physics & MOSFET</h1><p id="domainDescription"></p></div>
+          <div class="domain-banner-meta"><strong id="domainQuestionTotal">100</strong><span>Questions</span><div class="mini-progress"><span id="domainProgressBar"></span></div><small id="domainProgressText">0% completed</small></div>
+        </div>
+        <div class="toolbar question-toolbar">
+          <label class="search-field"><span>⌕</span><input id="questionSearch" type="search" placeholder="Search within this domain..."></label>
+          <div class="toolbar-actions"><button class="outline-btn" id="randomInDomain">🎲 Random</button><button class="outline-btn" id="expandAll">＋ Expand all</button><button class="outline-btn" id="collapseAll">－ Collapse all</button></div>
+        </div>
+        <div class="tab-row" id="qTabs">
+          <button class="tab active" data-filter="all">All</button><button class="tab" data-filter="todo">To do</button><button class="tab" data-filter="done">Understood</button><button class="tab" data-filter="saved">Bookmarked</button>
+        </div>
+        <div class="question-list-head"><span id="questionListTitle">All questions</span><span id="questionResultCount">100 questions</span></div>
+        <div class="question-list" id="questionList"></div>
+        <div class="list-footer"><span id="listFooterText">Showing 100 questions</span><button class="text-btn" id="topBtn">Back to top ↑</button></div>
+      </section>
+
+      <section class="view" id="bookmarksView">
+        <div class="page-heading"><div><div class="eyebrow">YOUR PERSONAL REVISION LIST</div><h1>Bookmarked questions</h1><p>Questions you have saved to revisit later.</p></div></div>
+        <div class="question-list" id="bookmarkList"></div>
+        <div class="empty-state hidden" id="bookmarkEmpty"><div class="empty-icon">⭐</div><h3>No bookmarks yet</h3><p>Save questions using the bookmark icon and they will appear here.</p></div>
+      </section>
+
+      <section class="view" id="completedView">
+        <div class="page-heading"><div><div class="eyebrow">YOUR LEARNING MILESTONES</div><h1>Completed questions</h1><p>Keep building momentum, one understood concept at a time.</p></div></div>
+        <div class="question-list" id="completedList"></div>
+        <div class="empty-state hidden" id="completedEmpty"><div class="empty-icon">🚀</div><h3>Nothing completed yet</h3><p>Mark a question as understood after reviewing its answer.</p></div>
+      </section>
+
+      <section class="view" id="searchView">
+        <div class="page-heading"><div><div class="eyebrow">SEARCH THE FULL QUESTION BANK</div><h1>Search results</h1><p id="searchSummary">Matching questions from all 50 domains.</p></div></div>
+        <div class="question-list" id="searchList"></div>
+        <div class="empty-state hidden" id="searchEmpty"><div class="empty-icon">🔎</div><h3>No matching questions</h3><p>Try a different keyword or a shorter search phrase.</p></div>
+      </section>
+      <footer class="footer"><span>VLSI MASTER INTERVIEW QUESTION BANK</span><span>50 domains <i>·</i> 5,000 questions</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

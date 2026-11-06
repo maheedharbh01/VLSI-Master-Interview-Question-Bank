@@ -1,22 +1,20 @@
-# VLSI-Master-Interview-Question-Bank
-A comprehensive, interactive VLSI interview preparation platform featuring  across 50 VLSI domains and 9 gamified achievement levels. Built with HTML, CSS, and JavaScript, featuring colorful UI, light/dark themes, progress tracking, XP-based rewards, bookmarks, and domain-wise learning to help aspiring VLSI engineers master semiconductor design.
+# VLSI Master Interview Preparation Portal — Vibrant Edition
 
+A colourful, browser-based learning portal generated from the VLSI Master Course PDF.
 
-vlsi
-vlsi-interview
-semiconductor
-rtl-design
-verilog
-systemverilog
-digital-design
-analog-design
-physical-design
-design-verification
-dft
-sta
-fpga
-asic-design
-html
-css
-javascript
-interview-preparation
+## What's inside
+- 50 technical domains · 100 questions and answers each · 5,000 Q&A pairs
+- **10 colour-coded tracks** (Digital & RTL, Verification, Timing, DFT, Physical Design, Analog/RF, Power, SoC/FPGA, Device & Process, Manufacturing & EDA)
+- Vibrant animated dashboard, gradient stat cards, domain banners in each track's colours
+- **Gamified progress**: XP, 9 levels (Wafer Rookie → VLSI Master), daily streak, domain-mastery badges, confetti
+- **Question of the day**, "Surprise me" random question, "Continue where you left off"
+- Answers split into coloured 💡 Example / 🛠️ Application / 🎯 Follow-up callouts
+- Per-domain filters (All / To do / Understood / Bookmarked), search with highlighting (global and per-domain)
+- Bookmarks and completion tracking saved in your browser (localStorage)
+- Light and dark themes · fully responsive
+
+## Run locally
+Keep these four files in the same folder and open `index.html`:
+`index.html`, `style.css`, `script.js`, `questions.js`
+
+No build step or server is required. Google Fonts load from the internet; everything else runs offline.
