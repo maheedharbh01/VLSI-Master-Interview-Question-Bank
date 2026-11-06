@@ -1,0 +1,15 @@
+{
+  "name": "SiliconSphere — VLSI Learning & Interview Preparation",
+  "short_name": "SiliconSphere",
+  "description": "50 VLSI domains and 5,000 interview questions with answers.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#faf7ff",
+  "theme_color": "#2a0f6e",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

@@ -2,61 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="VLSI Master Interview Question Bank — 50 domains and 5,000 questions with answers.">
-  <title>VLSI Master — Interview Question Bank</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SiliconSphere — VLSI Learning &amp; Interview Preparation</title>
+  <meta name="description" content="SiliconSphere is a complete VLSI learning and interview preparation platform: 50 domains and 5,000 interview questions with answers across RTL, verification, STA, DFT, physical design, analog, power and semiconductor process.">
+  <meta name="keywords" content="VLSI interview questions, Verilog, SystemVerilog, UVM, STA, DFT, physical design, CMOS, semiconductor, ASIC, FPGA">
+  <meta name="author" content="SiliconSphere">
+  <meta name="theme-color" content="#2a0f6e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d0a25" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://silicon-sphere.netlify.app/">
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SiliconSphere">
+  <meta property="og:title" content="SiliconSphere — The Complete VLSI Learning & Interview Preparation Platform">
+  <meta property="og:description" content="50 VLSI domains · 5,000 interview questions with answers · XP, levels, streaks and progress tracking.">
+  <meta property="og:url" content="https://silicon-sphere.netlify.app/">
+  <meta property="og:image" content="https://silicon-sphere.netlify.app/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SiliconSphere — 50 VLSI domains and 5,000 interview questions">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SiliconSphere — VLSI Learning & Interview Preparation">
+  <meta name="twitter:description" content="50 VLSI domains · 5,000 interview questions with answers.">
+  <meta name="twitter:image" content="https://silicon-sphere.netlify.app/assets/og-image.png">
+
+  <!-- Branding -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Apply the saved (or system) theme before first paint to avoid a flash -->
+  <script>
+    (function(){try{var t=localStorage.getItem("vlsi_master_theme_v1");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark");}catch(e){}})();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <!-- Question bank (≈1.7 MB, compressed in transit) and app logic load deferred so the shell paints immediately -->
+  <script src="questions.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="scrim" id="scrim" hidden></div>
   <div class="app-shell">
-    <aside class="sidebar" id="sidebar">
-      <a class="brand" href="#" id="brandHome" aria-label="VLSI Master home">
-        <span class="brand-mark">V</span><span><strong>VLSI MASTER</strong><small>INTERVIEW PREP</small></span>
+    <aside class="sidebar" id="sidebar" aria-label="Primary">
+      <a class="brand" href="#/" aria-label="SiliconSphere home">
+        <span class="brand-mark"><img src="assets/favicon.svg" alt="" width="42" height="42"></span>
+        <span><strong>SILICONSPHERE</strong><small>VLSI LEARN · PREP</small></span>
       </a>
       <div class="side-label">WORKSPACE</div>
       <nav class="side-nav">
-        <button class="nav-item active" data-view="dashboard" style="--n1:#ff4fa3;--n2:#ff8a3d"><span class="nav-icon">🏠</span> Dashboard</button>
-        <button class="nav-item" data-view="domains" style="--n1:#7c5cff;--n2:#38bdf8"><span class="nav-icon">📚</span> All domains <span class="nav-count" id="domainNavCount">50</span></button>
-        <button class="nav-item" data-view="bookmarks" style="--n1:#ffb300;--n2:#ff6f00"><span class="nav-icon">⭐</span> Bookmarks <span class="nav-count" id="navBookmarks">0</span></button>
-        <button class="nav-item" data-view="completed" style="--n1:#12b76a;--n2:#84cc16"><span class="nav-icon">✅</span> Completed <span class="nav-count" id="navCompleted">0</span></button>
+        <a class="nav-item" href="#/" data-nav="dashboard" style="--n1:#ff4fa3;--n2:#ff8a3d"><span class="nav-icon" aria-hidden="true">🏠</span> Dashboard</a>
+        <a class="nav-item" href="#/domains" data-nav="domains" style="--n1:#7c5cff;--n2:#38bdf8"><span class="nav-icon" aria-hidden="true">📚</span> All domains <span class="nav-count" id="domainNavCount">50</span></a>
+        <a class="nav-item" href="#/bookmarks" data-nav="bookmarks" style="--n1:#ffb300;--n2:#ff6f00"><span class="nav-icon" aria-hidden="true">⭐</span> Bookmarks <span class="nav-count" id="navBookmarks">0</span></a>
+        <a class="nav-item" href="#/completed" data-nav="completed" style="--n1:#12b76a;--n2:#84cc16"><span class="nav-icon" aria-hidden="true">✅</span> Completed <span class="nav-count" id="navCompleted">0</span></a>
+        <a class="nav-item" href="#/achievements" data-nav="achievements" style="--n1:#8b3dff;--n2:#ff4fd8"><span class="nav-icon" aria-hidden="true">🏆</span> Achievements</a>
       </nav>
       <div class="sidebar-bottom">
-        <div class="side-level">
+        <a class="side-level" href="#/achievements">
           <div class="side-level-top"><span class="lvl-badge" id="sideLevelBadge">LV 1</span><span id="sideLevelName">Wafer Rookie</span></div>
-        </div>
+          <div class="side-xp"><span id="sideXpBar"></span></div>
+          <small id="sideXpText">0 XP</small>
+        </a>
         <div class="side-progress">
-          <div class="side-progress-top"><span>Your progress</span><b id="sidePercent">0%</b></div>
+          <div class="side-progress-top"><span>Overall progress</span><b id="sidePercent">0%</b></div>
           <div class="progress-track"><span id="sideProgressBar"></span></div>
           <small id="sideProgressText">0 of 5,000 completed</small>
         </div>
-        <button class="nav-item" id="themeToggle" aria-label="Toggle dark theme"><span class="nav-icon" id="themeIcon">🌙</span><span id="themeText">Dark theme</span><span class="toggle"><i></i></span></button>
+        <button class="nav-item theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="nav-icon" data-theme-icon aria-hidden="true">🌙</span><span data-theme-text>Dark theme</span><span class="toggle" aria-hidden="true"><i></i></span></button>
       </div>
     </aside>
 
-    <main class="main-area">
+    <main class="main-area" id="main" tabindex="-1">
       <header class="topbar">
-        <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
-        <div class="breadcrumbs" id="breadcrumbs"><span>Workspace</span><b>/</b><strong>Dashboard</strong></div>
+        <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"><a href="#/">Workspace</a><b>/</b><strong>Dashboard</strong></nav>
         <div class="top-actions">
-          <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Search all 5,000 questions..." autocomplete="off"><kbd>⌘ K</kbd></label>
-          <div class="avatar">VM</div>
+          <label class="global-search"><span aria-hidden="true">⌕</span><span class="sr-only">Search all questions</span><input id="globalSearch" type="search" placeholder="Search 5,000 questions & answers…" autocomplete="off" enterkeyhint="search"><kbd>Ctrl K</kbd></label>
+          <button class="icon-round" type="button" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><span data-theme-icon aria-hidden="true">🌙</span></button>
+          <a class="level-chip" href="#/achievements" id="levelChip" aria-label="Achievements"><span id="levelChipIcon" aria-hidden="true">🌱</span><b id="levelChipText">LV 1</b></a>
         </div>
       </header>
 
-      <section class="view active" id="dashboardView">
+      <div class="loading" id="loading" role="status"><div class="spinner" aria-hidden="true"></div><p>Loading the question bank…</p></div>
+      <noscript><div class="empty-state"><h3>JavaScript required</h3><p>SiliconSphere needs JavaScript enabled to load the question bank.</p></div></noscript>
+
+      <!-- ================= Dashboard ================= -->
+      <section class="view" id="dashboardView" aria-labelledby="heroTitle">
         <div class="hero">
           <div class="hero-copy">
-            <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR COMPLETE VLSI LEARNING LIBRARY</div>
-            <h1>Build confidence.<br><span>Master every domain.</span></h1>
-            <p>Explore a structured VLSI interview question bank, one concept at a time. Choose a domain, reveal answers, earn levels and watch your progress light up.</p>
+            <div class="eyebrow"><span class="eyebrow-dot"></span> THE COMPLETE VLSI LEARNING &amp; INTERVIEW PLATFORM</div>
+            <h1 id="heroTitle">Build confidence.<br><span>Master every domain.</span></h1>
+            <p>Work through a structured VLSI interview question bank one concept at a time. Pick a domain, reveal answers, mark what you understand and watch your level, streak and progress grow.</p>
             <div class="hero-buttons">
-              <button class="primary-btn" id="exploreBtn">Explore all domains <span>→</span></button>
-              <button class="ghost-btn hidden" id="continueBtn">▶ Continue</button>
-              <button class="ghost-btn" id="randomBtn">🎲 Surprise me</button>
+              <a class="primary-btn" href="#/domains">Explore all domains <span aria-hidden="true">→</span></a>
+              <button class="ghost-btn hidden" id="continueBtn" type="button">▶ Continue</button>
+              <button class="ghost-btn" id="randomBtn" type="button">🎲 Surprise me</button>
             </div>
           </div>
           <div class="hero-art" aria-hidden="true">
@@ -67,84 +114,149 @@
         </div>
 
         <div class="stats-grid">
-          <article class="stat-card s-purple"><div class="stat-icon">📚</div><div><span>Total domains</span><strong id="totalDomains">50</strong><small>Technical specializations</small></div></article>
-          <article class="stat-card s-blue"><div class="stat-icon">🧠</div><div><span>Total questions</span><strong id="totalQuestions">5,000</strong><small>Questions with detailed answers</small></div></article>
-          <article class="stat-card s-green"><div class="stat-icon">✅</div><div><span>Completed</span><strong id="completedCount">0</strong><small>Marked as understood</small></div></article>
-          <article class="stat-card s-orange"><div class="stat-icon">⭐</div><div><span>Bookmarked</span><strong id="bookmarkCount">0</strong><small>Saved for revision</small></div></article>
+          <article class="stat-card s-purple"><div class="stat-icon" aria-hidden="true">📚</div><div><span>Total domains</span><strong id="totalDomains">50</strong><small>Technical specializations</small></div></article>
+          <article class="stat-card s-blue"><div class="stat-icon" aria-hidden="true">🧠</div><div><span>Total questions</span><strong id="totalQuestions">5,000</strong><small>Questions with detailed answers</small></div></article>
+          <a class="stat-card s-green" href="#/completed"><div class="stat-icon" aria-hidden="true">✅</div><div><span>Completed</span><strong id="completedCount">0</strong><small>Marked as understood</small></div></a>
+          <a class="stat-card s-orange" href="#/bookmarks"><div class="stat-icon" aria-hidden="true">⭐</div><div><span>Bookmarked</span><strong id="bookmarkCount">0</strong><small>Saved for revision</small></div></a>
         </div>
 
         <div class="journey-grid">
           <article class="qotd" id="qotd">
-            <div class="qotd-top"><span class="qotd-tag">💡 QUESTION OF THE DAY</span><button class="mini-btn" id="qotdShuffle">🎲 Another</button></div>
-            <div class="qotd-domain" id="qotdDomain"></div>
+            <div class="qotd-top"><span class="qotd-tag">💡 QUESTION OF THE DAY</span><button class="mini-btn" id="qotdShuffle" type="button">🎲 Another</button></div>
+            <a class="qotd-domain" id="qotdDomain" href="#/"></a>
             <h3 id="qotdQuestion"></h3>
             <div class="qotd-answer hidden" id="qotdAnswer"></div>
-            <div class="qotd-actions"><button class="primary-btn small" id="qotdReveal">Reveal answer</button><button class="mini-btn light" id="qotdOpen">Open in domain →</button></div>
+            <div class="qotd-actions"><button class="primary-btn small" id="qotdReveal" type="button" aria-expanded="false">Reveal answer</button><a class="mini-btn light" id="qotdOpen" href="#/">Study this question →</a></div>
           </article>
           <article class="journey">
-            <div class="journey-head"><div class="ring" id="levelRing"><span id="ringText">0%</span></div>
+            <div class="journey-head"><div class="ring" id="levelRing" role="img" aria-label="Overall progress"><span id="ringText">0%</span></div>
               <div><div class="eyebrow">YOUR JOURNEY</div><h3 id="levelName">Wafer Rookie</h3><small id="levelSub">Level 1 · 0 XP</small></div></div>
-            <div class="xp-track"><span id="xpBar"></span></div>
+            <div class="xp-track" role="progressbar" aria-label="Progress to next level" aria-valuemin="0" aria-valuemax="100" id="xpTrack"><span id="xpBar"></span></div>
             <small class="xp-text" id="xpText">Complete 25 questions to reach the next level</small>
+            <p class="motivation" id="motivation"></p>
             <div class="journey-stats"><div><b id="streakCount">0</b><span>🔥 day streak</span></div><div><b id="domainsDone">0</b><span>🏆 domains mastered</span></div><div><b id="xpTotal">0</b><span>⚡ total XP</span></div></div>
           </article>
         </div>
 
+        <div class="section-heading" id="inProgressHeading"><div><div class="eyebrow">PICK UP WHERE YOU LEFT OFF</div><h2>In progress</h2><p>Domains you have started but not yet mastered.</p></div></div>
+        <div class="domain-grid" id="inProgressDomains"></div>
+
         <div class="section-heading"><div><div class="eyebrow">COLOR-CODED TRACKS</div><h2>Browse by track</h2><p>Ten learning tracks — every domain is color-coded to its track.</p></div></div>
         <div class="track-grid" id="trackGrid"></div>
 
-        <div class="section-heading"><div><div class="eyebrow">LEARNING PATH</div><h2>Featured domains</h2><p>Start with the fundamentals or jump straight into your area of focus.</p></div><button class="text-btn" id="viewAllBtn">View all 50 domains <span>→</span></button></div>
+        <div class="section-heading"><div><div class="eyebrow">LEARNING PATH</div><h2>Featured domains</h2><p>Start with the fundamentals or jump straight into your area of focus.</p></div><a class="text-btn" href="#/domains">View all 50 domains <span aria-hidden="true">→</span></a></div>
         <div class="domain-grid" id="featuredDomains"></div>
       </section>
 
-      <section class="view" id="domainsView">
-        <div class="page-heading"><div><div class="eyebrow">THE COMPLETE LIBRARY</div><h1>All VLSI domains</h1><p>50 domains · 100 questions each · 5,000 questions in total</p></div></div>
-        <div class="toolbar"><label class="search-field"><span>⌕</span><input id="domainSearch" type="search" placeholder="Find a domain..."></label><span class="result-count" id="domainResultCount">50 domains</span></div>
-        <div class="chip-row" id="trackFilters"></div>
+      <!-- ================= All domains ================= -->
+      <section class="view" id="domainsView" aria-labelledby="domainsTitle">
+        <div class="page-heading"><div><div class="eyebrow">THE COMPLETE LIBRARY</div><h1 id="domainsTitle">All VLSI domains</h1><p id="domainsSub">50 domains · 100 questions each · 5,000 questions in total</p></div></div>
+        <div class="toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only">Find a domain</span><input id="domainSearch" type="search" placeholder="Find a domain…" autocomplete="off"></label><span class="result-count" id="domainResultCount" aria-live="polite">50 domains</span></div>
+        <div class="chip-row" id="trackFilters" role="toolbar" aria-label="Filter by track"></div>
         <div class="domain-grid" id="allDomains"></div>
       </section>
 
-      <section class="view" id="questionsView">
-        <button class="back-link" id="backDomains">← Back to all domains</button>
+      <!-- ================= Domain questions ================= -->
+      <section class="view" id="questionsView" aria-labelledby="domainTitle">
+        <a class="back-link" href="#/domains">← Back to all domains</a>
         <div class="domain-banner" id="domainBanner">
-          <div class="banner-emoji" id="bannerEmoji">🔬</div>
-          <div class="banner-copy"><div class="eyebrow" id="domainEyebrow">DOMAIN 01</div><h1 id="domainTitle">Semiconductor Physics & MOSFET</h1><p id="domainDescription"></p></div>
-          <div class="domain-banner-meta"><strong id="domainQuestionTotal">100</strong><span>Questions</span><div class="mini-progress"><span id="domainProgressBar"></span></div><small id="domainProgressText">0% completed</small></div>
+          <div class="banner-emoji" id="bannerEmoji" aria-hidden="true">🔬</div>
+          <div class="banner-copy"><div class="eyebrow" id="domainEyebrow">DOMAIN 01</div><h1 id="domainTitle">Domain</h1><p id="domainDescription"></p>
+            <div class="banner-actions"><a class="banner-btn" id="studyDomainBtn" href="#/">▶ Study mode</a><button class="banner-btn ghost" id="randomInDomain" type="button">🎲 Random question</button></div>
+          </div>
+          <div class="domain-banner-meta"><strong id="domainQuestionTotal">100</strong><span>Questions</span><div class="mini-progress"><span id="domainProgressBar"></span></div><small id="domainProgressText">0% completed</small><small class="banner-sub" id="domainBannerSub"></small></div>
         </div>
         <div class="toolbar question-toolbar">
-          <label class="search-field"><span>⌕</span><input id="questionSearch" type="search" placeholder="Search within this domain..."></label>
-          <div class="toolbar-actions"><button class="outline-btn" id="randomInDomain">🎲 Random</button><button class="outline-btn" id="expandAll">＋ Expand all</button><button class="outline-btn" id="collapseAll">－ Collapse all</button></div>
+          <label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only">Search within this domain</span><input id="questionSearch" type="search" placeholder="Search within this domain…" autocomplete="off"></label>
+          <label class="select-field hidden" id="sectionField"><span class="sr-only">Filter by section</span><select id="sectionSelect"></select></label>
+          <div class="toolbar-actions"><button class="outline-btn" id="expandAll" type="button">＋ Expand all</button><button class="outline-btn" id="collapseAll" type="button">－ Collapse all</button></div>
         </div>
-        <div class="tab-row" id="qTabs">
-          <button class="tab active" data-filter="all">All</button><button class="tab" data-filter="todo">To do</button><button class="tab" data-filter="done">Understood</button><button class="tab" data-filter="saved">Bookmarked</button>
+        <div class="tab-row" id="qTabs" role="toolbar" aria-label="Filter questions">
+          <button class="tab active" type="button" data-filter="all" aria-pressed="true">All</button><button class="tab" type="button" data-filter="todo" aria-pressed="false">To do</button><button class="tab" type="button" data-filter="done" aria-pressed="false">Understood</button><button class="tab" type="button" data-filter="saved" aria-pressed="false">Bookmarked</button>
         </div>
-        <div class="question-list-head"><span id="questionListTitle">All questions</span><span id="questionResultCount">100 questions</span></div>
+        <div class="question-list-head"><span id="questionListTitle">All questions</span><span id="questionResultCount" aria-live="polite">100 questions</span></div>
         <div class="question-list" id="questionList"></div>
-        <div class="list-footer"><span id="listFooterText">Showing 100 questions</span><button class="text-btn" id="topBtn">Back to top ↑</button></div>
+        <div class="list-footer"><span id="listFooterText"></span><button class="text-btn" type="button" data-scroll-top>Back to top ↑</button></div>
+        <nav class="domain-pager" id="domainPager" aria-label="Adjacent domains"></nav>
       </section>
 
-      <section class="view" id="bookmarksView">
-        <div class="page-heading"><div><div class="eyebrow">YOUR PERSONAL REVISION LIST</div><h1>Bookmarked questions</h1><p>Questions you have saved to revisit later.</p></div></div>
+      <!-- ================= Study mode (single question) ================= -->
+      <section class="view" id="studyView" aria-labelledby="studyQuestion">
+        <a class="back-link" id="studyBack" href="#/">← Back</a>
+        <article class="study-card" id="studyCard">
+          <header class="study-head">
+            <a class="study-domain" id="studyDomain" href="#/"></a>
+            <span class="study-pos" id="studyPos"></span>
+          </header>
+          <div class="study-section" id="studySection"></div>
+          <div class="study-track"><span id="studyTrackBar"></span></div>
+          <h1 class="study-question" id="studyQuestion"></h1>
+          <div class="study-reveal" id="studyRevealWrap">
+            <button class="primary-btn small" id="studyReveal" type="button" aria-expanded="false" aria-controls="studyAnswer">Reveal answer <kbd>Space</kbd></button>
+            <label class="check-inline"><input type="checkbox" id="studyAutoReveal"> Always show answers</label>
+          </div>
+          <div class="study-answer answer-text hidden" id="studyAnswer"></div>
+          <div class="study-actions">
+            <button class="small-action" id="studyDone" type="button" aria-pressed="false">✓ Mark as understood <kbd>M</kbd></button>
+            <button class="small-action" id="studySave" type="button" aria-pressed="false">☆ Bookmark <kbd>B</kbd></button>
+            <button class="small-action" id="studyCopy" type="button">▢ Copy</button>
+          </div>
+        </article>
+        <nav class="study-nav" aria-label="Question navigation">
+          <a class="study-nav-btn" id="studyPrev" href="#/"><span>← Previous</span><small id="studyPrevLabel"></small></a>
+          <a class="study-nav-btn next" id="studyNext" href="#/"><span>Next →</span><small id="studyNextLabel"></small></a>
+        </nav>
+        <p class="kbd-hint">Shortcuts: <kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>Space</kbd> reveal · <kbd>M</kbd> mark understood · <kbd>B</kbd> bookmark</p>
+      </section>
+
+      <!-- ================= Bookmarks ================= -->
+      <section class="view" id="bookmarksView" aria-labelledby="bookmarksTitle">
+        <div class="page-heading"><div><div class="eyebrow">YOUR PERSONAL REVISION LIST</div><h1 id="bookmarksTitle">Bookmarked questions</h1><p id="bookmarksSub">Questions you have saved to revisit later.</p></div><a class="outline-btn hidden" id="studyBookmarks" href="#/">▶ Study bookmarks</a></div>
         <div class="question-list" id="bookmarkList"></div>
-        <div class="empty-state hidden" id="bookmarkEmpty"><div class="empty-icon">⭐</div><h3>No bookmarks yet</h3><p>Save questions using the bookmark icon and they will appear here.</p></div>
+        <div class="empty-state hidden" id="bookmarkEmpty"><div class="empty-icon">⭐</div><h3>No bookmarks yet</h3><p>Save questions using the ☆ icon and they will appear here.</p></div>
       </section>
 
-      <section class="view" id="completedView">
-        <div class="page-heading"><div><div class="eyebrow">YOUR LEARNING MILESTONES</div><h1>Completed questions</h1><p>Keep building momentum, one understood concept at a time.</p></div></div>
+      <!-- ================= Completed ================= -->
+      <section class="view" id="completedView" aria-labelledby="completedTitle">
+        <div class="page-heading"><div><div class="eyebrow">YOUR LEARNING MILESTONES</div><h1 id="completedTitle">Completed questions</h1><p id="completedSub">Keep building momentum, one understood concept at a time.</p></div></div>
         <div class="question-list" id="completedList"></div>
         <div class="empty-state hidden" id="completedEmpty"><div class="empty-icon">🚀</div><h3>Nothing completed yet</h3><p>Mark a question as understood after reviewing its answer.</p></div>
       </section>
 
-      <section class="view" id="searchView">
-        <div class="page-heading"><div><div class="eyebrow">SEARCH THE FULL QUESTION BANK</div><h1>Search results</h1><p id="searchSummary">Matching questions from all 50 domains.</p></div></div>
+      <!-- ================= Achievements ================= -->
+      <section class="view" id="achievementsView" aria-labelledby="achTitle">
+        <div class="page-heading"><div><div class="eyebrow">GAMIFIED PROGRESS</div><h1 id="achTitle">Achievements</h1><p>Earn 10 XP for every question you mark as understood. Climb nine levels from Wafer Rookie to VLSI Master.</p></div></div>
+        <div class="ach-summary" id="achSummary"></div>
+        <h2 class="sub-heading">Levels</h2>
+        <div class="level-grid" id="levelGrid"></div>
+        <h2 class="sub-heading">Study activity <small>last 5 weeks</small></h2>
+        <div class="activity" id="activity"></div>
+        <h2 class="sub-heading">Track completion</h2>
+        <div class="track-ach" id="trackAch"></div>
+        <h2 class="sub-heading">Domain mastery badges <small id="badgeCount"></small></h2>
+        <div class="badge-grid" id="badgeGrid"></div>
+        <h2 class="sub-heading">Your data</h2>
+        <div class="data-box">
+          <p>Progress is saved in this browser only. Export a backup to move it to another device or browser.</p>
+          <div class="data-actions"><button class="outline-btn" id="exportBtn" type="button">⬇ Export progress</button><label class="outline-btn file-btn">⬆ Import progress<input type="file" id="importInput" accept="application/json,.json"></label></div>
+        </div>
+      </section>
+
+      <!-- ================= Search ================= -->
+      <section class="view" id="searchView" aria-labelledby="searchTitle">
+        <div class="page-heading"><div><div class="eyebrow">SEARCH THE FULL QUESTION BANK</div><h1 id="searchTitle">Search results</h1><p id="searchSummary" aria-live="polite">Matching questions from all 50 domains.</p></div></div>
+        <div class="chip-row" id="searchFacets" role="toolbar" aria-label="Filter results by domain"></div>
         <div class="question-list" id="searchList"></div>
         <div class="empty-state hidden" id="searchEmpty"><div class="empty-icon">🔎</div><h3>No matching questions</h3><p>Try a different keyword or a shorter search phrase.</p></div>
       </section>
-      <footer class="footer"><span>VLSI MASTER INTERVIEW QUESTION BANK</span><span>50 domains <i>·</i> 5,000 questions</span></footer>
+
+      <section class="view" id="notfoundView">
+        <div class="empty-state"><div class="empty-icon">🧭</div><h3>Page not found</h3><p>That link doesn't match any domain or question.</p><p><a class="primary-btn small" href="#/">Go to dashboard</a></p></div>
+      </section>
+
+      <footer class="footer"><span>SILICONSPHERE · VLSI LEARNING &amp; INTERVIEW PREPARATION</span><span>50 domains <i>·</i> 5,000 questions</span></footer>
     </main>
   </div>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="questions.js"></script>
-  <script src="script.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
